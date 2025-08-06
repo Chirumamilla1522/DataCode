@@ -1,6 +1,6 @@
 # DataCode
 
-A comprehensive LeetCode-style platform for ML/AI learning and practice.
+A comprehensive LeetCode-style platform for ML/AI learning and practice, deployed on Vercel.
 
 ## Features
 
@@ -12,10 +12,21 @@ A comprehensive LeetCode-style platform for ML/AI learning and practice.
 ## Project Structure
 
 ```
-codeML/
-├── frontend/          # React/TypeScript frontend
-├── backend/           # Node.js/Express backend
-└── docs/             # Documentation
+DataCode/
+├── api/                 # Vercel serverless functions
+│   └── server.js       # Express API server
+├── public/             # Static files
+├── src/                # React/TypeScript source code
+│   ├── App.tsx         # Main React component
+│   ├── App.css         # Styling
+│   ├── index.tsx       # Entry point
+│   ├── index.css       # Global styles
+│   └── utils/
+│       └── clearDemoData.ts  # Utility functions
+├── package.json        # Dependencies and scripts
+├── tsconfig.json       # TypeScript configuration
+├── vercel.json         # Vercel deployment config
+└── README.md           # This file
 ```
 
 ## Getting Started
@@ -25,7 +36,7 @@ codeML/
 - Node.js (v16 or higher)
 - npm or yarn
 
-### Installation
+### Local Development
 
 1. Clone the repository:
 ```bash
@@ -35,23 +46,32 @@ cd DataCode
 
 2. Install dependencies:
 ```bash
-# Frontend
-cd frontend
-npm install
-
-# Backend
-cd ../backend
 npm install
 ```
 
-3. Start the development servers:
+3. Start the development server:
 ```bash
-# Frontend (from frontend directory)
-npm start
-
-# Backend (from backend directory)
 npm run dev
 ```
+
+4. Build for production:
+```bash
+npm run build
+```
+
+### Vercel Deployment
+
+This project is configured for automatic deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel
+2. Vercel will automatically detect the configuration and deploy
+3. The API will be available at `/api/*` endpoints
+4. The frontend will be served from the root
+
+## API Endpoints
+
+- `GET /api/problems` - Get ML problems list
+- `GET /api/health` - Health check endpoint
 
 ## Contributing
 

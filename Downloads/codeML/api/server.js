@@ -2,10 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(helmet());
@@ -46,6 +44,13 @@ app.get('/api/problems', (req, res) => {
         difficulty: 'Medium',
         category: 'Deep Learning',
         description: 'Implement backpropagation algorithm'
+      },
+      {
+        id: 3,
+        title: 'Convolutional Neural Networks',
+        difficulty: 'Hard',
+        category: 'Deep Learning',
+        description: 'Build a CNN for image classification'
       }
     ]
   });
@@ -62,7 +67,14 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`DataCode server running on port ${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
-}); 
+// Export for Vercel
+module.exports = app;
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`DataCode server running on port ${PORT}`);
+    console.log(`Health check: http://localhost:${PORT}/health`);
+  });
+} 
